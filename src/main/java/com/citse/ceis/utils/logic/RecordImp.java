@@ -62,27 +62,35 @@ public class RecordImp implements RecordService {
         return repo.save(record);
     }
 
+
     @Override
     public Record confirmStamp(String dni, String eventCode) {
-        User user = userService.findByDni(dni);
-        Event event = eventService.findByCode(eventCode);
-        if(event.getTypeEvent()== EventType.CHARLA_MAGISTRAL || event.getTypeEvent()== EventType.GENERAL){
-                var record = repo.findByUserAndEvent(user,event);
-        	if(record.isPresent())
-            		throw new GUSException("RECORD_SERVICE", "Record already exist", HttpStatus.NOT_FOUND);
-		Record record = new Record();
-	        record.setDate(LocalDateTime.now());
-        	record.setUser(user);
-        	record.setEvent(event);
-        	record.setConfirm(true);
-		return repo.save(record);
+      User user = userService.findByDni(dni);
+      Event event = eventService.findByCode(eventCode);
+
+      if (event.getTypeEvent() == EventType.CHARLA_MAGISTRAL || event.getTypeEvent() == EventType.GENERAL) {
+           var existingRecord = repo.findByUserAndEvent(user, event);
+           if (existingRecord.isPresent()) {
+             throw new GUSException("RECORD_SERVICE", "Record already exists", HttpStatus.NOT_FOUND);
+           }
+        
+           Record newRecord = new Record();
+           newRecord.setDate(LocalDateTime.now());
+           newRecord.setUser(user);
+           newRecord.setEvent(event);
+           newRecord.setConfirm(true);
+           return repo.save(newRecord);
         }
-	var record = repo.findByUserAndEvent(user,event);
-	if(record.isEmpty())
-            throw new GUSException("RECORD_SERVICE", "Record doesn't exist", HttpStatus.NOT_FOUND);
-        record.get().setConfirm(true);
-        return repo.save(record.get());
-    }
+
+        var existingConfirmedRecord = repo.findByUserAndEvent(user, event);
+        if (existingConfirmedRecord.isEmpty()) {
+           throw new GUSException("RECORD_SERVICE", "Record doesn't exist", HttpStatus.NOT_FOUND);
+        }
+    
+        existingConfirmedRecord.get().setConfirm(true);
+        return repo.save(existingConfirmedRecord.get());
+    } 
+
 
     @Override
     public Record save(String genCode) {
