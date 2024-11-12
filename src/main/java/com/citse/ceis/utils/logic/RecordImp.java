@@ -135,8 +135,8 @@ public class RecordImp implements RecordService {
 
     private void verifyRecord(User user, Event event){
         var record = repo.findByUserAndEvent(user,event);
-        if(record.isPresent())
-            throw new GUSException("RECORD_SERVICE", "Record already exists", HttpStatus.valueOf(300));
+        if(record.isEmpty())
+            throw new GUSException("RECORD_SERVICE", "Record doesn't exists", HttpStatus.valueOf(300));
     }
 
     private void updateQuota(Event event){
