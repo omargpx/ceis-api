@@ -1,5 +1,5 @@
 # JDK y Gradle
-FROM gradle:7.3.0-jdk17 AS build
+FROM gradle:8.10.2-jdk17 AS build
 
 # directory
 WORKDIR /app
