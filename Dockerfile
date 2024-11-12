@@ -1,0 +1,15 @@
+# JDK y Gradle
+FROM gradle:7.3.0-jdk17 AS build
+
+# directory
+WORKDIR /app
+COPY . /app
+
+# run gradle
+RUN gradle clean build
+
+# create image
+FROM openjdk:17-jre-slim-buster
+EXPOSE 8080
+COPY --from=build /app/build/libs/ceis-0.0.1-SNAPSHOT.jar /app/ceis-0.0.1-SNAPSHOT.jar
+ENTRYPOINT ["java", "-jar", "/app/ceis-0.0.1-SNAPSHOT.jar"]
