@@ -17,8 +17,7 @@ primary_region = 'bog'
   processes = ['app']
 
 [[vm]]
-  size = "shared-cpu-2x"
   memory = "2gb"
-  cpus = 4
+  cpus = 1
   cpu_kind = "performance"
   memory_mb = 2048
