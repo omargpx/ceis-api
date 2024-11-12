@@ -71,7 +71,7 @@ public class RecordImp implements RecordService {
       if (event.getTypeEvent() == EventType.CHARLA_MAGISTRAL || event.getTypeEvent() == EventType.GENERAL) {
            var existingRecord = repo.findByUserAndEvent(user, event);
            if (existingRecord.isPresent()) {
-             throw new GUSException("RECORD_SERVICE", "Record already exists", HttpStatus.NOT_FOUND);
+             return existingRecord.get();
            }
         
            Record newRecord = new Record();
