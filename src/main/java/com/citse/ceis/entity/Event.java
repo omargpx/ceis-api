@@ -49,9 +49,6 @@ public class Event implements Serializable {
     private Event father;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "bEvent")
-    private List<Booking> bookings;
-    @JsonIgnore
     @OneToMany(mappedBy = "event")
     private List<Record> records;
     @JsonIgnore

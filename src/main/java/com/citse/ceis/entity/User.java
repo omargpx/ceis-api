@@ -39,10 +39,7 @@ public class User implements Serializable {
     private String code;
     @Column(name = "rol")
     private String rol;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "bUser")
-    private List<Booking> bookings;
+    
     @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Record> records;
