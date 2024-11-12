@@ -67,7 +67,10 @@ public class RecordImp implements RecordService {
         User user = userService.findByDni(dni);
         Event event = eventService.findByCode(eventCode);
         if(event.getTypeEvent()== EventType.CHARLA_MAGISTRAL || event.getTypeEvent()== EventType.GENERAL){
-                Record record = new Record();
+                var record = repo.findByUserAndEvent(user,event);
+        	if(record.isPresent())
+            t		hrow new GUSException("RECORD_SERVICE", "Record already exist", HttpStatus.NOT_FOUND);
+		Record record = new Record();
 	        record.setDate(LocalDateTime.now());
         	record.setUser(user);
         	record.setEvent(event);
