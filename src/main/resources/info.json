@@ -1,0 +1,26 @@
+{
+  "properties": {
+    "name": "CEIS - Backend",
+    "version": "1.0",
+    "description": "CEIS an event and workshop registration application"
+  },
+  "keywords":["CEIS","events","UPeU workshops"],
+  "public_paths": {
+
+  },
+  "url": "/info",
+  "sponsor": "UPeU-TPP",
+  "licence": "ISC",
+  "authors": [
+    {
+      "name": "Omar Guerrero",
+      "role": "developer",
+      "github": "https://github.com/omargpx"
+    },
+    {
+      "name": "David Prada",
+      "role": "developer",
+      "github": "https://github.com/davichois"
+    }
+  ]
+}
