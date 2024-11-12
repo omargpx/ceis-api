@@ -23,7 +23,7 @@ primary_region = 'scl'
   memory_mb = 2048
 
 [http_service.http_options]
-  idle_timeout = 2700
+  idle_timeout = 650
 
 [[services]]
   http_checks = []
