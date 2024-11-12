@@ -19,5 +19,5 @@ primary_region = 'bog'
 [[vm]]
   memory = "2gb"
   cpus = 1
-  cpu_kind = "performance"
+  cpu_kind = "shared"
   memory_mb = 2048
