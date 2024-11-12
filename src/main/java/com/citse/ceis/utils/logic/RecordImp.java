@@ -66,8 +66,16 @@ public class RecordImp implements RecordService {
     public Record confirmStamp(String dni, String eventCode) {
         User user = userService.findByDni(dni);
         Event event = eventService.findByCode(eventCode);
-        var record = repo.findByUserAndEvent(user,event);
-        if(record.isEmpty())
+        if(event.getTypeEvent()== EventType.CHARLA_MAGISTRAL || event.getTypeEvent()== EventType.GENERAL){
+                Record record = new Record();
+	        record.setDate(LocalDateTime.now());
+        	record.setUser(user);
+        	record.setEvent(event);
+        	record.setConfirm(true);
+		return repo.save(record);
+        }
+	var record = repo.findByUserAndEvent(user,event);
+	if(record.isEmpty())
             throw new GUSException("RECORD_SERVICE", "Record doesn't exist", HttpStatus.NOT_FOUND);
         record.get().setConfirm(true);
         return repo.save(record.get());
