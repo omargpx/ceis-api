@@ -18,8 +18,7 @@ public interface RecordDao extends JpaRepository<Record,Integer> {
             "JOIN r.event e " +
             "JOIN r.user u " +
             "WHERE u.dni = :dni " +
-            "AND r.confirm = false " +
-            "AND (e.typeEvent = 'COLOQUIO' OR e.typeEvent = 'SESIONES_PARALELAS')")
+            "AND r.confirm = false ")
     List<Record> findUnconfirmedRecordsByUserDniAndEventType(@Param("dni") String dni);
     @Query("SELECT r FROM Record r WHERE r.event.typeEvent = 'COLOQUIO' OR r.event.typeEvent = 'SESIONES_PARALELAS'")
     List<Record> findAllByEvents();
