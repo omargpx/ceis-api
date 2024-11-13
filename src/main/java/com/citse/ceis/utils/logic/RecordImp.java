@@ -97,7 +97,7 @@ public class RecordImp implements RecordService {
 
     @Override
     public List<Event> getRecordsByUser(String dni) {
-        return repo.findAllByUser(userService.findByDni(dni)).stream()
+        return repo.findUnconfirmedRecordsByUserDniAndEventType(dni).stream()
                 .map(Record::getEvent)
                 .collect(Collectors.toList());
     }
